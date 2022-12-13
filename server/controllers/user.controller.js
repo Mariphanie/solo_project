@@ -27,5 +27,80 @@ module.exports = {
             })
     },
 
+    login: (req, res) => {
+        User.findOne({email: req.body.email})
+            .then((userRecord) => {
+                //check if this returned object is null
+                if(userRecord === null){
+                    res.status(400).json({message: "Invalid Login Attempt"})
+                }
+                else {
+                    //email is found
+                    bcrypt.compare(req.body.password, userRecord.password)
+                        .then((isPasswordValid) => {
+                            if(isPasswordValid){
+                                console.log("Password is Valid");
+                                res.cookie(
+                                    "usertoken",
+                                    jwt.sign(
+                                        {
+                                            id:userRecord._id,
+                                            email: userRecord.email,
+                                            firstName: userRecord.firstName
+                                        },
+
+                                        process.env.JWT_SECRET
+                                    ),
+
+                                        {
+                                            httpOnly: true,
+                                            expires: new Date(Date.now() + 9000000)
+                                        }
+                                ).json({
+                                    message: "Successful",
+                                    userId: userRecord._id,
+                                    userLoggedIn: userRecord.email,
+                                });
+                            }
+                            else{
+                                res.status(400).json({message: "Invalid Attempt" })
+                            }
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                            res.status(400).json({message: "Invalid Attempt" });
+                        })
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+                res.status(400).json({message: "Invalid Attempt" });
+            })
+    },
+
+    logout: (req, res) => {
+        console.log("logging out");
+        res.clearCookie("usertoken");
+        res.json({
+            message:"You have succesfully logged out"
+        });
+    },
+
+    getLoggedInUser: (req, res) => {
+
+        const decodedJWT = jwt.decode(req.cookies.usertoken, {
+            complete: true
+        })
+
+        User.findOne({_id: decodedJWT.payload.id})
+            .then((user) => {
+                console.log(user);
+                res.json(user)
+            })
+            .catch((err) =>{
+                console.log(err);
+            })
+    }
+
 
 }

@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
-const NewRecipe = (props) => {
-    
-    const {recipe, setRecipe} = props;
+
+const UpdateRecipe = (props) => {
+
+    const { id } = useParams();
 
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
@@ -15,18 +16,17 @@ const NewRecipe = (props) => {
     const [extraIngredients, setExtraIngredients] = useState("")
     const [instructions, setInstructions] = useState("")
 
-
     const navigate = useNavigate();
 
     const handleChange = () => {
-        setIsVegan(true);
+        setIsVegan(!isVegan);
     };
 
     const onSubmitHandler = (e) => {
 
         e.preventDefault();
 
-        axios.post('http://localhost:8000/api/recipes', {
+        axios.post(`http://localhost:8000/api/recipes/${id}`, {
             name,
             description,
             totalCookTime,
@@ -39,21 +39,15 @@ const NewRecipe = (props) => {
         }, {withCredentials: true})
     
             .then(res => {
-                console.log("attempting to create new recipe")
-                console.log(res);
                 console.log(res.data);
-
-                setRecipe([...recipe, res.data]);
-                
                 navigate('/home')
+            
             })
             .catch(err => console.log(err))
             
-    
-
     }
 
-    return (
+return (
 
     <div className='container bg-dark text-light p-5'>
         
@@ -91,9 +85,8 @@ const NewRecipe = (props) => {
             </p>
 
             <p>
-                <label>Choose Your Protein:
+                <label>Pick Your Protein:
                 <select value={protein} onChange = { (e) => setProtein(e.target.value)}>
-                    <option>Choose your Protein</option>
                     <option value="Beef">Beef</option>
                     <option value="Turkey">Turkey</option>
                     <option value="Chicken">Chicken</option>
@@ -112,9 +105,8 @@ const NewRecipe = (props) => {
             </p>
 
             <p>
-                <label>Choose Your Dairy:
+                <label>Pick Your Dairy:
                 <select value={protein} onChange = { (e) => setDairy(e.target.value)}>
-                    <option>Choose your Dairy</option>
                     <option value="Whole Milk">Whole Milk</option>
                     <option value="Skim Milk">Skim Milk</option>
                     <option value="Heavy Cream">Heavy Cream</option>
@@ -128,26 +120,16 @@ const NewRecipe = (props) => {
                 </label>
             </p>
 
-            <p>Is it Vegan?</p>
-            <div className='form-check'>
-                <label className='form-check-label' for="form-radio-checked">Yes</label>
-                <input className='form-check-input' 
-                    type="radio" 
+            <p>
+
+                <label>Is it Vegan?</label>
+                <input className='form-control' 
+                    type="checkbox" 
                     name="isVegan" 
                     isVegan={isVegan}
                     onChange = {handleChange} 
                     />
-            </div>
-            
-            <div className='form-check'>
-                <label className='form-check-label' for="form-radio-checked">No</label>
-                <input className='form-check-input' 
-                    type="radio" 
-                    name="isVegan" 
-                    isVegan={isVegan}
-                    onChange = {handleChange} 
-                    />
-            </div>
+            </p>
 
             <p>
                 
@@ -166,14 +148,15 @@ const NewRecipe = (props) => {
             </p>
 
             <div>
-                <input type="submit" className='btn btn-success' value="Create Recipe" />
+                <input type="submit" className='btn btn-success' value="Update Recipe" />
             </div>
 
         </form>
 
     </div>
 
+
     )
 }
 
-export default NewRecipe
+export default UpdateRecipe
