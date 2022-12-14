@@ -86,6 +86,7 @@ module.exports = {
         });
     },
 
+
     getLoggedInUser: (req, res) => {
 
         const decodedJWT = jwt.decode(req.cookies.usertoken, {

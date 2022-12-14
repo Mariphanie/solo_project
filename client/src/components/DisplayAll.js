@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const DisplayAll = () => {
 
     const [ recipe, setRecipe ] = useState([]);
+    const [ user, setUser ] = useState([]);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios.get("http://localhost:8000/api/recipes")
@@ -18,28 +21,52 @@ const DisplayAll = () => {
         })
     }, [])
 
+    const logoutUser = (e) => {
+        axios.post('http://localhost:8000/api/users/logout')
+        .then((res) => {
+            console.log(res.data);
+            setUser(res.data)
+
+            navigate('/')
+
+        })
+        .catch(err => console.log(err))
+    }
+
+    const deleteRecipe = (recipeId) => {
+        axios.delete(`http://localhost:8000/api/recipes/${recipeId}`)
+        .then(res => {
+            removeFromDom(recipeId)
+        })
+        .catch(err => console.log(err))
+    }
+
+    const removeFromDom = recipeId => {
+        setRecipe(recipe.filter(food => food._id !== recipeId));
+    }
+
+
     return (
 
         <div className='container'>
 
-            <h1>Welcome, User </h1>
+            <h1>Welcome to Best of Both Recipes </h1>
 
             <div>
             <Link to={"/recipe/new"}>CreateRecipe</Link>
             </div>
 
-            <div>
-            <Link to={"/"}>logout</Link>
-            </div>
+            <button className='btn btn-link' onClick={logoutUser}>Logout
+            </button>
 
-            <table className='table table-striped table-dark'>
+            <table className='table table-hover table-dark'>
                 <thead>
                     <tr>
                         <th scope="col" className="text-light bg-dark">Name</th>
                         <th scope="col" className="text-light bg-dark">TCT (total cook time)</th>
                         <th scope="col" className="text-light bg-dark">Vegan?</th>
                         <th scope="col" className="text-light bg-dark">Posted By</th>
-                        <th colspan="3" className="text-light bg-dark">Actions</th>
+                        <th colSpan="3" className="text-light bg-dark">Actions</th>
                     </tr>
                 </thead>
 
@@ -60,7 +87,12 @@ const DisplayAll = () => {
 
                                 <td><Link to={`/recipe/edit/${food._id}`}>Edit</Link></td>
 
-                                <td><Link to={`/recipe/delete/${food._id}`}>Delete</Link></td>
+                                <td>
+                                <button className='text-dark bg-danger' onClick={(e)=>{deleteRecipe(food._id)}}>Delete
+                                </button>
+                                
+                                </td>
+                            
                             </tr>
                         );
                     })}

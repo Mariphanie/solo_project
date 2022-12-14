@@ -3,24 +3,26 @@ import {Link, useParams} from 'react-router-dom';
 import axios from 'axios';
 
 
-const OneRecipe = (props) => {
+const VeganRecipe = (props) => {
 
     const {id} = useParams();
 
-    const [singleRecipe, setSingleRecipe] = useState({});
-
+    const [singleVeganRecipe, setSingleVeganRecipe] = useState({});
 
     useEffect(()=>{
-        axios.get(`http://localhost:8000/api/recipes/${id}`)
+        axios.get(`http://localhost:8000/api/recipesvegan/${id}`)
             .then((res)=>{
                 console.log(res.data);
-                setSingleRecipe(res.data);
+                setSingleVeganRecipe(res.data);
         })
             .catch((err)=>{
                 console.log(err);
         })
     }, [id])
 
+    // const VeganizeIt = () => {
+    //     axios.get 
+    // }
 
     return (
     <>
@@ -30,19 +32,21 @@ const OneRecipe = (props) => {
         <div className='card text-dark bg-light'>
 
             <div className='card-header text-light bg-dark'>
-            <h2>{singleRecipe.name}</h2>
+            {/* <h2>{singleRecipe.name}</h2>
             </div>
 
             <div className='card-body'>
-            <h6 className='card-text'>Description: {singleRecipe.description}</h6>
-            <br></br>
-            <p className='card-text'>Total Cook Time: {singleRecipe.totalCookTime}</p>
+                <h5> {singleRecipe.description} </h5> */}
+            
+            {/* <p className='card-text'>Total Cook Time: {singleRecipe.totalCookTime}</p>
             <p className='card-text'>Protein: {singleRecipe.protein}</p>
             <p className='card-text'>Dairy: {singleRecipe.dairy}</p>
             <p className='card-text'>Is It Vegan? {singleRecipe.isVegan}</p>
             <p className='card-text'>Extra Ingredients: {singleRecipe.extraIngredients}</p>
-            <p className='card-text'>Instructions: {singleRecipe.instructions}</p>
+            <p className='card-text'>Instructions: {singleRecipe.instructions}</p> */}
 
+            
+            <button className='btn btn-success'>Veganize It</button>
             </div>
 
         </div>
@@ -54,4 +58,4 @@ const OneRecipe = (props) => {
 
 }
 
-export default OneRecipe
+export default VeganRecipe

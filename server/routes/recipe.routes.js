@@ -6,7 +6,7 @@ module.exports = (app) => {
 
     app.get('/api/recipes', RecipeController.getAllRecipes);
 
-    app.get('/api/recipes/:email', authenticate, RecipeController.findAllRecipesByUser)
+    // app.get('/api/recipesbyuser/:firstName', authenticate, RecipeController.findAllRecipesByUser)
 
     app.get('/api/recipes/:id', RecipeController.getOneRecipe);
 

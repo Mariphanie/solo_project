@@ -27,7 +27,7 @@ const RecipeController = {
 
     getAllRecipes:(req, res) => {
         Recipe.find()
-        .populate("createdBy", "email")
+        .populate("createdBy", "firstName")
         .then((allRecipes) => {
             res.json(allRecipes)
         })
@@ -59,37 +59,37 @@ const RecipeController = {
 
     },
 
-    findAllRecipesByUser: (req, res) =>{
-        if(req.jwtpayload.email !== req.params.email){
-            User.findOne({email: req.params.email})
-                .then((userNotLoggedIn)=>{
-                    Recipe.find({createdBy: userNotLoggedIn._id})
-                        .then((allRecipesFromUser) => {
-                            console.log(allRecipesFromUser);
-                            res.json(allRecipesFromUser);
-                        })
-                        .catch((err)=>{
-                            console.log(err);
-                            res.status(400).json({msg: "Something went wrong", error: err})
-                        })
-                })
-                .catch((err)=>{
-                    console.log(err);
-                    res.status(400).json({msg: "Something went wrong", error: err})
-                })
-        }
-        else{
-            Recipe.find({createdBy: req.jwtpayload.id})
-                .then((allRecipesFromLoggedInUser) => {
-                    console.log(allRecipesFromLoggedInUser);
-                    res.json(allRecipesFromLoggedInUser);
-                })
-                .catch((err)=>{
-                    console.log(err);
-                    res.status(400).json(err);
-                })
-        }
-    },
+    // findAllRecipesByUser: (req, res) =>{
+    //     if(req.jwtpayload.firstName !== req.params.firstName){
+    //         User.findOne({firstName: req.params.firstName})
+    //             .then((userNotLoggedIn)=>{
+    //                 Recipe.find({createdBy: userNotLoggedIn._id})
+    //                     .then((allRecipesFromUser) => {
+    //                         console.log(allRecipesFromUser);
+    //                         res.json(allRecipesFromUser);
+    //                     })
+    //                     .catch((err)=>{
+    //                         console.log(err);
+    //                         res.status(400).json({msg: "Something went wrong", error: err})
+    //                     })
+    //             })
+    //             .catch((err)=>{
+    //                 console.log(err);
+    //                 res.status(400).json({msg: "Something went wrong", error: err})
+    //             })
+    //     }
+    //     else{
+    //         Recipe.find({createdBy: req.jwtpayload.id})
+    //             .then((allRecipesFromLoggedInUser) => {
+    //                 console.log(allRecipesFromLoggedInUser);
+    //                 res.json(allRecipesFromLoggedInUser);
+    //             })
+    //             .catch((err)=>{
+    //                 console.log(err);
+    //                 res.status(400).json(err);
+    //             })
+    //     }
+    // },
 
     deleteRecipe:(req, res) => {
         Recipe.findOneAndDelete({_id:req.params.id})
