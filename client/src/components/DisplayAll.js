@@ -33,6 +33,7 @@ const DisplayAll = () => {
         .catch(err => console.log(err))
     }
 
+
     const deleteRecipe = (recipeId) => {
         axios.delete(`http://localhost:8000/api/recipes/${recipeId}`)
         .then(res => {
@@ -46,11 +47,13 @@ const DisplayAll = () => {
     }
 
 
+
+
     return (
 
         <div className='container'>
 
-            <h1>Welcome to Best of Both Recipes </h1>
+            <h1>Welcome to Best of Both Recipes</h1>
 
             <div>
             <Link to={"/recipe/new"}>CreateRecipe</Link>

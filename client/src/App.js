@@ -5,7 +5,7 @@ import NewRecipe from './components/NewRecipe';
 import DisplayAll from './components/DisplayAll';
 import UpdateRecipe from './components/UpdateRecipe';
 import OneRecipe from './views/OneRecipe';
-import VeganRecipe from './views/VeganRecipe';
+
 
 
 function App() {
@@ -23,7 +23,7 @@ function App() {
         <Route element={<NewRecipe />} path='/recipe/new' />
         <Route element={<UpdateRecipe />} path='/recipe/edit/:id' />
         <Route element={<OneRecipe />} path='/recipe/one/:id' />
-        <Route element={<VeganRecipe/>} path='/recipe/vegan/:id'/>
+
 
 
       </Routes>

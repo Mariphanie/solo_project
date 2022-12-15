@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 
@@ -43,7 +43,7 @@ const Register = (props) => {
 
 return (
 
-    <div className='container bg-dark text-light p-5'>
+    <div className='reg-container container text-light p-5'>
         <form onSubmit={onSubmitHandler}>
             <h1>Register</h1>
 
