@@ -43,12 +43,15 @@ const Register = (props) => {
 
 return (
 
-    <div className='reg-container container text-light p-5'>
+    <div className='reg-container container text-dark p-5'>
         <form onSubmit={onSubmitHandler}>
-            <h1>Register</h1>
+            
+            <h1 className="reg-header">Welcome to CookBook Recipes</h1>
+            
+            <h2 className='text-light'>Register</h2>
 
             <p>
-                <label>First Name</label>
+                <label className='reg-label'>First Name</label>
                 <input className='form-control'
                     type ="text"
                     name="firstName"
@@ -58,7 +61,7 @@ return (
             </p>
 
             <p>
-                <label>Last Name</label>
+                <label className='reg-label'>Last Name</label>
                 <input className='form-control'
                     type ="text"
                     name="lastName"
@@ -68,7 +71,7 @@ return (
             </p>
 
             <p>
-                <label>Email</label>
+                <label className='reg-label'>Email</label>
                 <input className='form-control' 
                     type="email" 
                     name="email" 
@@ -78,7 +81,7 @@ return (
             </p>
 
             <p>
-                <label>Password</label>
+                <label className='reg-label'>Password</label>
                 <input className='form-control' 
                     type="password" 
                     name="password" 
@@ -88,7 +91,7 @@ return (
             </p>
 
             <p>
-                <label>Confirm Password</label>
+                <label className='reg-label'>Confirm Password</label>
                 <input className='form-control' 
                     type="password" 
                     name="password" 
@@ -98,7 +101,7 @@ return (
             </p>
 
             <div>
-                <input type="submit" className='btn btn-success' value="Register" />
+                <input type="submit" className='btn btn-dark' value="Register" />
             </div>
 
         </form>

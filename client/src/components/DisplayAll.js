@@ -21,6 +21,7 @@ const DisplayAll = () => {
         })
     }, [])
 
+
     const logoutUser = (e) => {
         axios.post('http://localhost:8000/api/users/logout')
         .then((res) => {
@@ -32,7 +33,6 @@ const DisplayAll = () => {
         })
         .catch(err => console.log(err))
     }
-
 
     const deleteRecipe = (recipeId) => {
         axios.delete(`http://localhost:8000/api/recipes/${recipeId}`)
@@ -49,20 +49,22 @@ const DisplayAll = () => {
 
 
 
+
     return (
 
         <div className='container'>
 
-            <h1>Welcome to Best of Both Recipes</h1>
+            <h1 className='table-header m-4'>CookBook Recipes</h1>
+
 
             <div>
-            <Link to={"/recipe/new"}>CreateRecipe</Link>
+            <Link to={"/recipe/new"} className="table-link">CreateRecipe</Link>
             </div>
 
-            <button className='btn btn-link' onClick={logoutUser}>Logout
+            <button className='btn table-link' onClick={logoutUser}>Logout
             </button>
 
-            <table className='table table-hover table-dark'>
+            <table className='table table-hover table-dark m-4'>
                 <thead>
                     <tr>
                         <th scope="col" className="text-light bg-dark">Name</th>

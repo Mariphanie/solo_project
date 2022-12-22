@@ -32,9 +32,9 @@ const Login = (props) => {
     }
 
     return (
-        <div className='container bg-dark text-light p-5'>
+        <div className='log-container container text-light p-5'>
         <form onSubmit={onSubmitHandler}>
-            <h1>Login</h1>
+            <h1 className='log-header'>Login</h1>
 
 
             <p>
@@ -52,7 +52,7 @@ const Login = (props) => {
             </p>
 
             <div>
-                <input type="submit" className='btn btn-primary' value="Login" />
+                <input type="submit" className='btn btn-dark' value="Login" />
             </div>
 
         </form>

@@ -17,7 +17,6 @@ function App() {
       <Routes>
 
         <Route element={<Main/>} path="/" default />
-      
     
         <Route element={<DisplayAll />} path='/home'/>
         <Route element={<NewRecipe />} path='/recipe/new' />

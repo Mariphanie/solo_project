@@ -25,15 +25,15 @@ const OneRecipe = (props) => {
     return (
     <>
 
-        <h1>Welcome User</h1>
-        <Link to={'/home'}>Home</Link>
+        <h1 className='reg-header'>Cookbook recipes</h1>
+        <Link to={'/home'} className='view-link'>Home</Link>
         <div className='card text-dark bg-light'>
 
             <div className='card-header text-light bg-dark'>
             <h2>{singleRecipe.name}</h2>
             </div>
 
-            <div className='card-body'>
+            <div className='recipe card-body'>
             <h6 className='card-text'>Description: {singleRecipe.description}</h6>
             <br></br>
             <p className='card-text'>Total Cook Time: {singleRecipe.totalCookTime}</p>

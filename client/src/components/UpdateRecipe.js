@@ -64,15 +64,15 @@ const UpdateRecipe = (props) => {
 
 return (
 
-    <div className='container bg-warning text-dark p-5'>
+    <div className='edit-container container bg-warning text-dark p-5'>
         
         <form onSubmit={updateRecipe}>
-            <h1>Edit Recipe</h1>
+            <h1 className='edit-header text-light'>Edit Recipe</h1>
 
             <Link to={'/home'}>Home</Link>
 
             <p>
-                <label>Name</label>
+                <label className='text-light'>Name</label>
                 <input className='form-control'
                     type ="text"
                     name="name"
@@ -82,14 +82,14 @@ return (
             </p>
 
             <p>
-                <label>Decription</label>
+                <label className='text-light'>Decription</label>
                 <textarea className='form-control' rows="5" value={description}
                 onChange = { (e) => setDescription(e.target.value)} />
                 
             </p>
 
             <p>
-                <label>Total Cook Time</label>
+                <label className='text-light'>Total Cook Time</label>
                 <input className='form-control' 
                     type="text" 
                     name="totalCookTime" 
@@ -99,7 +99,7 @@ return (
             </p>
 
             <p>
-                <label>Pick Your Protein:
+                <label className='text-light'>Pick Your Protein:
                 <select value={protein} onChange = { (e) => setProtein(e.target.value)}>
                     <option>Choose your Protein</option>
                     <option value="Ground Beef">Ground Beef</option>
@@ -131,7 +131,7 @@ return (
             </p>
 
             <p>
-                <label>Pick Your Dairy:
+                <label className='text-light'>Pick Your Dairy:
                 <select value={dairy} onChange = { (e) => setDairy(e.target.value)}>
                     <option>Choose your Dairy</option>
                     <option value="Eggs">Eggs</option>
@@ -163,9 +163,9 @@ return (
                 </label>
             </p>
 
-            <p>Is it Vegan?</p>
+            <p className='text-light'>Is it Vegan?</p>
             <div className='form-check'>
-                <label className='form-check-label' for="form-radio-checked">Yes</label>
+                <label className='form-check-label text-light' for="form-radio-checked">Yes</label>
                 <input className='form-check-input' 
                     type="radio" 
                     name="isVegan"
@@ -176,7 +176,7 @@ return (
             </div>
             
             <div className='form-check'>
-                <label className='form-check-label' for="form-radio-checked">No</label>
+                <label className='form-check-label text-light' for="form-radio-checked">No</label>
                 <input className='form-check-input' 
                     type="radio" 
                     name="isVegan"
@@ -186,21 +186,21 @@ return (
                     />
             </div>
 
-            <div><label>Extra Ingredients:</label></div>
+            <div><label className='text-light'>Extra Ingredients:</label></div>
             <p>
                 <textarea className='form-control' rows="5" value={extraIngredients}
                 onChange = { (e) => setExtraIngredients(e.target.value)} />
                 
             </p>
 
-            <div><label>Instructions:</label></div>
+            <div><label className='text-light'>Instructions:</label></div>
             <p>
                 <textarea className='form-control' rows="5" value={instructions} 
                 onChange = { (e) => setInstructions(e.target.value)} />
             </p>
 
             <div>
-                <input type="submit" className='btn btn-success' value="Update Recipe" />
+                <input type="submit" className='btn btn-warning' value="Update Recipe" />
             </div>
 
         </form>

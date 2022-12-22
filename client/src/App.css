@@ -1,42 +1,101 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+body {
+  background-color: grey;
+  background-image: url("https://media-cldnry.s-nbcnews.com/image/upload/rockcms/2022-03/plant-based-food-mc-220323-02-273c7b.jpg");
 }
 
 .reg-container{
-  background-color: aquamarine;
+  background-color: #0f4a00;
+  background-image: url("https://p0.pxfuel.com/preview/890/112/925/spoons-art-shadows-black-and-white.jpg");
+  border: 2px solid black;
+  margin: 70px 100px;
+}
+
+.form-control {
+  border: 2px solid black;
+  border-radius: 10px;
+}
+
+.reg-header {
+  text-align: center;
+  background-color: black;
+  color: white;
+  font-family: cursive;
+}
+
+.log-container {
+  background-color: #0f4a00;
+  background-image: url("https://www.pinkladyfoodphotographeroftheyear.com/media/HC_caroline-trotter_apple-pie-making_credited-1-1-1024x683.jpg");
+  border: 2px solid black;
+  margin: 70px 100px;
+}
+
+.reg-label {
+  background-color: black;
+  color: white;
+  border-radius: 10%;
+  margin-bottom: 5px;
+  }
+
+.table-header {
+  font-family:cursive;
+  background-color: antiquewhite;
+  text-align: center;
+  color: black;
+  border: 2px solid black;
+  border-radius: 5px;
+  width: 100%
+  }
+
+.table-link {
+  background-color: antiquewhite;
+  color: black;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  margin: 20px;
+  border: 2px solid black;
+  border-radius: 5px;
+  }
+
+.new-container {
+  background-image: url("https://www.shutterbug.com/images/styles/600_wide/public/Action-Food-Photography-Tips_0.jpg");
+}
+
+.radio {
+  background-color: black;
+  color: white;
+  width: 10%;
+}
+
+.new-header {
+  text-align: center;
+  background-color: black;
+  color: white;
+  font-family: cursive;
+}
+
+.edit-container {
+  background-image: url("https://foodphotographyacademy.co/wp-content/uploads/2019/10/Chocolate-Cake-Example-2-660x990.jpg");
+}
+
+.view-link {
+  background-color: black;
+  color: white;
+  text-decoration: none;
+  margin: 5%;
+  padding: 15px 15px;
+}
+
+.edit-header {
+  font-family: cursive;
+}
+
+.recipe {
+  background-color: antiquewhite;
+}
+
+.log-header {
+  color:white;
+  background-color: black;
+  width: 15%;
 }

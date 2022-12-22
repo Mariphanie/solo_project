@@ -59,16 +59,16 @@ const NewRecipe = (props) => {
 
     return (
 
-    <div className='container bg-dark text-primary p-5'>
+    <div className='new-container container bg-dark text-dark p-5'>
         
         <form onSubmit={onSubmitHandler}>
-            <h1>Add a New Recipe</h1>
+            <h1 className='new-header'>Add a New Recipe</h1>
 
-            <Link to={'/home'} className='text-light'>Home</Link>
+            <Link to={'/home'} className='text-primary'>Home</Link>
             
 
             <p>
-                <label>Name</label>
+                <label className='reg-label'>Name</label>
                 <input className='form-control'
                     type ="text"
                     name="Name"
@@ -78,7 +78,7 @@ const NewRecipe = (props) => {
             </p>
 
             <p>
-                <label>Decription</label>
+                <label className='reg-label'>Decription</label>
                 <textarea className='form-control' rows="5" value={description}
                 onChange = { (e) => setDescription(e.target.value)} />
                 
@@ -86,7 +86,7 @@ const NewRecipe = (props) => {
 
 
             <p>
-                <label>Total Cook Time</label>
+                <label className='reg-label'>Total Cook Time</label>
                 <input className='form-control' 
                     type="text" 
                     name="totalCookTime" 
@@ -96,7 +96,7 @@ const NewRecipe = (props) => {
             </p>
 
             <p>
-                <label>Choose Your Protein:
+                <label className='reg-label'>Choose Your Protein:
                 <select value={protein} onChange = { (e) => setProtein(e.target.value)}>
                     <option>Choose your Protein</option>
                     <option value="Ground Beef">Ground Beef</option>
@@ -127,7 +127,7 @@ const NewRecipe = (props) => {
             </p>
 
             <p>
-                <label>Choose Your Dairy:
+                <label className='reg-label'>Choose Your Dairy:
                 <select value={dairy} onChange = { (e) => setDairy(e.target.value)}>
                     <option>Choose your Dairy</option>
                     <option value="Eggs">Eggs</option>
@@ -159,9 +159,9 @@ const NewRecipe = (props) => {
             </p>
 
 
-            <p>Is it Vegan?</p>
+            <p className='radio'>Is it Vegan?</p>
             <div className='form-check'>
-                <label className='form-check-label' for="form-radio-checked">Yes</label>
+                <label className='form-check-label text-light' for="form-radio-checked">Yes</label>
                 <input className='form-check-input' 
                     type="radio" 
                     name="isVegan" 
@@ -172,7 +172,7 @@ const NewRecipe = (props) => {
             </div>
             
             <div className='form-check'>
-                <label className='form-check-label' for="form-radio-checked">No</label>
+                <label className='form-check-label text-light' for="form-radio-checked">No</label>
                 <input className='form-check-input' 
                     type="radio" 
                     name="isVegan" 
@@ -182,21 +182,21 @@ const NewRecipe = (props) => {
                     />
             </div>
 
-            <div><label>Extra Ingredients:</label></div>
+            <div><label className='reg-label'>Extra Ingredients:</label></div>
             <p>
                 <textarea className='form-control' rows="5" value={extraIngredients}
                 onChange = { (e) => setExtraIngredients(e.target.value)} />
                 
             </p>
 
-            <div><label>Instructions:</label></div>
+            <div><label className='reg-label'>Instructions:</label></div>
             <p>
                 <textarea className='form-control' rows="5" value={instructions} 
                 onChange = {(e) => setInstructions(e.target.value)} />
             </p>
 
             <div>
-                <input type="submit" className='btn btn-success' value="Create Recipe" />
+                <input type="submit" className='btn btn-dark' value="Create Recipe" />
             </div>
 
         </form>
