@@ -1,16 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 
-const Register = () => {
 
-    const [ user, setUser ] = useState({});
+const Register = (props) => {
 
-    const [ fname, setFname ] = useState("")
-    const [ lname, setLname] = useState("")
-    const [ email, setEmail] = useState("")
-    const [ password, setPassword] = useState("")
-    const [ confirmPW, setConfirmPW] = useState("")
+    const [user, setUser] = useState({});
+
+    const [firstName, setFirstName] = useState("")
+    const [lastName, setLastName] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [confirmPassword, setConfirmPassword] = useState("")
 
     const navigate = useNavigate();
 
@@ -19,72 +20,94 @@ const Register = () => {
         e.preventDefault();
 
         axios.post('http://localhost:8000/api/users/register', {
-            firstName: fname,
-            lastName: lname,
+            firstName,
+            lastName,
             email,
             password,
-            confirmPassword: confirmPW
+            confirmPassword
+
         }, {withCredentials: true})
+    
             .then(res => {
                 console.log("attempting to register")
                 console.log(res);
                 console.log(res.data);
+
                 setUser({});
-                navigate('/display/all')
+                
+                navigate('/home')
             })
             .catch(err => console.log(err))
             
     }
 
-    return (
+return (
 
-    <div className='container bg-dark text-light p-5'>
+    <div className='reg-container container text-dark p-5'>
         <form onSubmit={onSubmitHandler}>
-            <h1>Register</h1>
+            
+            <h1 className="reg-header">Welcome to CookBook Recipes</h1>
+            
+            <h2 className='text-light'>Register</h2>
+
             <p>
-                <label>First Name</label>
-                <input className='form-control' type="text" name="name" value={fname}
-                    onChange = { (e) => setFname(e.target.value)} 
+                <label className='reg-label'>First Name</label>
+                <input className='form-control'
+                    type ="text"
+                    name="firstName"
+                    value={firstName}
+                    onChange = { (e) => setFirstName(e.target.value)}
                     />
-                {fname && fname.length < 3 ? <p className='alert alert-warning'>First Name must be at least 3 characters long!</p>: null }
             </p>
 
             <p>
-                <label>Last Name</label>
-                <input className='form-control' type="text" name="type" value={lname}
-                    onChange = { (e) => setLname(e.target.value)} 
+                <label className='reg-label'>Last Name</label>
+                <input className='form-control'
+                    type ="text"
+                    name="lastName"
+                    value={lastName}
+                    onChange = { (e) => setLastName(e.target.value)}
                     />
-                {lname && lname.length < 3 ? <p className='alert alert-warning'>Last Name must be at least 3 characters long!</p>: null }
             </p>
 
             <p>
-                <label>Email</label>
-                <input className='form-control' type="text" name="description" value={email}
+                <label className='reg-label'>Email</label>
+                <input className='form-control' 
+                    type="email" 
+                    name="email" 
+                    value={email}
                     onChange = { (e) => setEmail(e.target.value)} 
                     />
             </p>
 
             <p>
-                <label>Password</label>
-                <input className='form-control' type="text" name="skillOne" value={password}
+                <label className='reg-label'>Password</label>
+                <input className='form-control' 
+                    type="password" 
+                    name="password" 
+                    value={password}
                     onChange = { (e) => setPassword(e.target.value)} 
                     />
             </p>
 
             <p>
-                <label>Confirm Password</label>
-                <input className='form-control' type="text" name="skillTwo" value={confirmPW}
-                    onChange = { (e) => setConfirmPW(e.target.value)} 
+                <label className='reg-label'>Confirm Password</label>
+                <input className='form-control' 
+                    type="password" 
+                    name="password" 
+                    value={confirmPassword}
+                    onChange = { (e) => setConfirmPassword(e.target.value)} 
                     />
             </p>
 
             <div>
-                <input type="submit" className='btn btn-success' value="Submit" />
+                <input type="submit" className='btn btn-dark' value="Register" />
             </div>
 
         </form>
 
     </div>
+
 
     )
 }

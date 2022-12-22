@@ -1,66 +1,106 @@
-const Recipe = require('../models/recipe.model'); 
+const Recipe = require('../models/recipe.model');
+const jwt = require("jsonwebtoken");
+const User = require('../models/user.model')
 
-module.exports.createRecipe = (request, response) => {
-    Recipe.create(request.body) 
-            .then((product) =>{
-                console.log(recipe)
-                response.json(recipe)
-            })
+const RecipeController = {
 
-            .catch(err => {
-                console.log(err)
-                response.json({ message: 'Something went wrong', error: err })
-            })
+    createRecipe:(req, res) => {
+        const newRecipeObject = new Recipe(req.body);
+
+        // const decodedJWT = jwt.decode(req.cookies.usertoken, {
+        //     complete: true
+        // })
+
+        // newRecipeObject.createdBy = decodedJWT.payload.id;
+        newRecipeObject.createdBy = req.jwtpayload.id;
+
+        newRecipeObject.save()
+
+        .then((newRecipe) => {
+            res.status(201).json(newRecipe)
+        })
+        .catch ((err) => {
+            res.status(404).json({msg: "Something went wrong", error: err})
+        })
+
     },
 
-module.exports.getAllRecipes = (request, response) => {
-    Recipe.find({})
+    getAllRecipes:(req, res) => {
+        Recipe.find()
+        .populate("createdBy", "firstName")
         .then((allRecipes) => {
-        console.log(allRecipes);
-        response.json(allRecipes);
-    })
-        .catch(err => {
-        console.log(err)
-        response.json({ message: 'Something went wrong', error: err })
-    })
-},
+            res.json(allRecipes)
+        })
+        .catch ((err) => {
+            res.status(404).json({msg: "Something went wrong", error: err})
+        })
 
-module.exports.getOneRecipe = (request, response) => {
-    Recipe.findOne({_id: request.params.id})
+    },
+
+    getOneRecipe:(req, res) => {
+        Recipe.findOne({_id:req.params.id})
         .then((oneRecipe) => {
-        console.log(oneRecipe);
-        response.json(oneRecipe);
-    })
-        .catch(err => {
-        console.log(err)
-        response.json({ message: 'Something went wrong', error: err })
-    })
-};
-
-module.exports.updateRecipe = (request, response) => {
-    Recipe.findOneAndUpdate(
-        {_id: request.params.id},
-        request.body,
-        { new:true, runValidators: true, })
-        .then((updatedRecipe) => {
-        console.log(updatedRecipe);
-        response.json(updatedrecipe);
-    })
-        .catch(err => {
-        console.log(err)
-        response.json({ message: 'Something went wrong', error: err })
-    })
-}
-
-module.exports.deleteRecipe = (request, response) => {
-    Recipe.deleteOne({ _id: request.params.id })
-        .then(deleteRecipe => {
-            console.log(deleteRecipe);
-            response.json(deleteRecipe);
+            res.status(201).json(oneRecipe)
+        })
+        .catch ((err) => {
+            res.json({msg: "Something went wrong", error: err})
         })
 
-        .catch(err => {
-            console.log(err)
-            response.json({ message: 'Something went wrong', error: err })
+    },
+
+    updateRecipe:(req, res) => {
+        Recipe.findOneAndUpdate({_id:req.params.id}, req.body, {new:true,runValidators:true})
+        .then((updateRecipe) => {
+            res.json(updateRecipe)
         })
+        .catch ((err) => {
+            res.status(404).json({msg: "Something went wrong", error: err})
+        })
+
+    },
+
+    // findAllRecipesByUser: (req, res) =>{
+    //     if(req.jwtpayload.firstName !== req.params.firstName){
+    //         User.findOne({firstName: req.params.firstName})
+    //             .then((userNotLoggedIn)=>{
+    //                 Recipe.find({createdBy: userNotLoggedIn._id})
+    //                     .then((allRecipesFromUser) => {
+    //                         console.log(allRecipesFromUser);
+    //                         res.json(allRecipesFromUser);
+    //                     })
+    //                     .catch((err)=>{
+    //                         console.log(err);
+    //                         res.status(400).json({msg: "Something went wrong", error: err})
+    //                     })
+    //             })
+    //             .catch((err)=>{
+    //                 console.log(err);
+    //                 res.status(400).json({msg: "Something went wrong", error: err})
+    //             })
+    //     }
+    //     else{
+    //         Recipe.find({createdBy: req.jwtpayload.id})
+    //             .then((allRecipesFromLoggedInUser) => {
+    //                 console.log(allRecipesFromLoggedInUser);
+    //                 res.json(allRecipesFromLoggedInUser);
+    //             })
+    //             .catch((err)=>{
+    //                 console.log(err);
+    //                 res.status(400).json(err);
+    //             })
+    //     }
+    // },
+
+    deleteRecipe:(req, res) => {
+        Recipe.findOneAndDelete({_id:req.params.id})
+        .then((deleteRecipe) => {
+            res.json(deleteRecipe)
+        })
+        .catch ((err) => {
+            res.json({msg: "Something went wrong", error: err})
+        })
+    },
+
 }
+
+module.exports = RecipeController
